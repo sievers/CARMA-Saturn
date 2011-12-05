@@ -1,6 +1,6 @@
 theta=[0 2*pi*(0:5)/6 0 pi];
 r=[0 ones(1,6) 2 2 ]*31/2;
-tobs=[ones(1,7) 1.5 1.5];
+tobs=[ones(1,7) 1 1];
 clf;plot(r.*cos(theta),r.*sin(theta),'*');
 fac=4;
 rr=[-511:512]/fac;
@@ -13,7 +13,7 @@ wt=0*pb;
 for j=1:numel(r),
   wt=wt+tobs(j)*circshift(pb2,round(fac*[r(j)*cos(theta(j)) r(j)*sin(theta(j))]));
 end
-clf;imagesc(rr,rr,wt');hold on;axis([-50 50 -50 50]);
+clf;imagesc(rr,rr,wt'/sum(tobs));hold on;axis([-50 50 -50 50]);
 
 ring_radii=[92 117.6 122.2 136.8]*1e3;
 saturn_radius=120660/2;
@@ -37,4 +37,5 @@ hfe=fill(-40+beam(1)*cos(th),40+beam(2)*sin(th),[1 1 1]);
 beam=[2.84 2.49]/2;
 hf3=fill(-30+beam(1)*cos(th),40+beam(2)*sin(th),[1 1 1]);
 
-
+colorbar
+print -depsc2 saturn_depth
